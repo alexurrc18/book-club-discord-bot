@@ -2,7 +2,6 @@ package com.alexandruc.bookclub;
 
 import com.alexandruc.bookclub.commands.GoodreadsCommand;
 import com.alexandruc.bookclub.commands.ProfileCommand;
-import com.alexandruc.bookclub.scraper.models.Profile;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.Permission;
@@ -48,6 +47,6 @@ public class Main implements EventListener {
     public void onEvent(GenericEvent event)
     {
         if (event instanceof ReadyEvent)
-            System.out.println("The book club helper bot is ready to help!");
+            System.out.println("Bot-ul s-a deschis");
     }
 }
