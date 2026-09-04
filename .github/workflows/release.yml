@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'src/main/**'
+      - 'build.gradle.kts'
 
 permissions:
   contents: write
@@ -26,14 +29,20 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x gradlew
 
+      - name: Extract Project Version
+        id: get_version
+        run: |
+          VERSION=$(./gradlew properties -q | grep '^version:' | awk '{print $2}')
+          echo "PROJECT_VERSION=$VERSION" >> $GITHUB_OUTPUT
+
       - name: Build Fat JAR with Shadow
         run: ./gradlew shadowJar -x test
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v1.1.${{ github.run_number }}
-          name: Release v1.1.${{ github.run_number }}
+          tag_name: v${{ steps.get_version.outputs.PROJECT_VERSION }}.${{ github.run_number }}
+          name: Release v${{ steps.get_version.outputs.PROJECT_VERSION }}.${{ github.run_number }}
           generate_release_notes: true
           files: build/libs/bookclub-bot.jar
         env:
