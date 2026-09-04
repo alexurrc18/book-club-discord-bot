@@ -15,7 +15,7 @@ import net.dv8tion.jda.api.interactions.commands.build.Commands;
 
 public class Main implements EventListener {
 
-    static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException {
         DatabaseManager.initDatabase();
         String token = System.getenv("BOT_TOKEN");
 
