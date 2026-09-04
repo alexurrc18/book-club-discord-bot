@@ -6,6 +6,7 @@ build/
 .kotlin
 
 .env
+bookclub.db
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
