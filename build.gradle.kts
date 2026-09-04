@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    id("com.gradleup.shadow") version "8.3.6"
 }
 
 group = "com.alexandruc"
@@ -18,6 +19,18 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:6.0.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "com.alexandruc.bookclub.Main"
+    }
+}
+
+tasks.shadowJar {
+    archiveBaseName.set("bookclub-bot")
+    archiveClassifier.set("")
+    archiveVersion.set("")
 }
 
 tasks.test {
