@@ -1,6 +1,7 @@
 package com.alexandruc.bookclub;
 
 import com.alexandruc.bookclub.commands.GoodreadsCommand;
+import com.alexandruc.bookclub.commands.ModCommands;
 import com.alexandruc.bookclub.commands.ProfileCommand;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -21,7 +22,7 @@ public class Main implements EventListener {
 
         JDA jda = JDABuilder.createDefault(token)
                 .setActivity(Activity.watching("Scrolling on Goodreads"))
-                .addEventListeners(new GoodreadsCommand(), new ProfileCommand())
+                .addEventListeners(new GoodreadsCommand(), new ProfileCommand(), new ModCommands())
                 .build();
 
         jda.updateCommands().addCommands(

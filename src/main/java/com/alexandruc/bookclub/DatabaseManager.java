@@ -28,7 +28,7 @@ public class DatabaseManager {
     }
 
     public static boolean isGoodreadsIdLinked(String goodreadsId) {
-        String sql = "SELECT 1 FROM user_profiles WHERE goodreads_id = ? AND discord_id != ? LIMIT 1";
+        String sql = "SELECT 1 FROM user_profiles WHERE goodreads_id = ? LIMIT 1";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -50,7 +50,7 @@ public class DatabaseManager {
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setLong(1, discordId);
                 pstmt.setString(2, goodreadsId);
-                pstmt.executeUpdate();
+                return pstmt.executeUpdate() > 0;
             } catch (SQLException e) {
                 System.err.println("Eroare la salvarea utilizatorului: " + e.getMessage());
                 return false;
