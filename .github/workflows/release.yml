@@ -14,7 +14,6 @@ permissions:
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -32,7 +31,7 @@ jobs:
       - name: Extract Project Version
         id: get_version
         run: |
-          VERSION=$(./gradlew properties -q | grep '^version:' | awk '{print $2}')
+          VERSION=$(grep -E '^\s*version\s*=' build.gradle.kts | sed -E 's/.*"([^"]+)".*/\1/')
           echo "PROJECT_VERSION=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Build Fat JAR with Shadow
@@ -41,8 +40,8 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v${{ steps.get_version.outputs.PROJECT_VERSION }}.${{ github.run_number }}
-          name: Release v${{ steps.get_version.outputs.PROJECT_VERSION }}.${{ github.run_number }}
+          tag_name: v${{ steps.get_version.outputs.PROJECT_VERSION }}
+          name: Release v${{ steps.get_version.outputs.PROJECT_VERSION }}
           generate_release_notes: true
           files: build/libs/bookclub-bot.jar
         env:
