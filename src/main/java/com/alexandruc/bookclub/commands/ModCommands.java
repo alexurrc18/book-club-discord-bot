@@ -44,7 +44,7 @@ public class ModCommands extends ListenerAdapter {
         event.deferReply().queue();
 
         OptionMapping userOpt = event.getOption("utilizator");
-        OptionMapping idOpt = event.getOption("id");
+        OptionMapping idOpt = event.getOption("id_goodreads");
 
         if (userOpt == null || idOpt == null) {
             event.getHook().sendMessage("Trebuie să specifici atât utilizatorul, cât și ID-ul Goodreads.").queue();
@@ -82,7 +82,7 @@ public class ModCommands extends ListenerAdapter {
         OptionMapping idOpt = event.getOption("id_goodreads");
 
         if (userOpt == null && idOpt == null) {
-            event.getHook().sendMessage("Trebuie să furnizezi cel puțin un parametru: fie `@utilizator`, fie `id_goodreads`.").queue();
+            event.getHook().sendMessage("Trebuie să furnizezi cel puțin un parametru: fie `@utilizator`, fie `id`.").queue();
             return;
         }
 
@@ -98,13 +98,15 @@ public class ModCommands extends ListenerAdapter {
             return;
         }
 
-        String goodreadsId = idOpt.getAsString().trim();
-        boolean deleted = DatabaseManager.deleteByGoodreadsId(goodreadsId);
+        if (idOpt != null) {
+            String goodreadsId = idOpt.getAsString().trim();
+            boolean deleted = DatabaseManager.deleteByGoodreadsId(goodreadsId);
 
-        if (deleted) {
-            event.getHook().sendMessage("Asocierea pentru profilul Goodreads cu ID-ul `" + goodreadsId + "` a fost ștearsă.").queue();
-        } else {
-            event.getHook().sendMessage("Nu a fost găsită nicio înregistrare în baza de date pentru ID-ul Goodreads `" + goodreadsId + "`.").queue();
+            if (deleted) {
+                event.getHook().sendMessage("Asocierea pentru profilul Goodreads cu ID-ul `" + goodreadsId + "` a fost ștearsă.").queue();
+            } else {
+                event.getHook().sendMessage("Nu a fost găsită nicio înregistrare în baza de date pentru ID-ul Goodreads `" + goodreadsId + "`.").queue();
+            }
         }
     }
 }

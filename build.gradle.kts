@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.alexandruc"
-version = "1.1"
+version = "1.2"
 
 repositories {
     mavenCentral()
@@ -13,7 +13,7 @@ repositories {
 dependencies {
     implementation("net.dv8tion:JDA:6.5.0")
     implementation("org.jsoup:jsoup:1.23.2")
-    implementation("ch.qos.logback:logback-classic:1.5.6")
+    implementation("ch.qos.logback:logback-classic:1.5.13")
     implementation("org.xerial:sqlite-jdbc:3.45.1.0")
 
     testImplementation(platform("org.junit:junit-bom:6.0.0"))

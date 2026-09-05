@@ -48,31 +48,31 @@ public class ProfileCommand extends ListenerAdapter {
         String thumbnail = profile.getAvatarUrl();
 
         EmbedBuilder embed = new EmbedBuilder()
-                .setTitle("Profil Goodreads: " + profile.getName(), profile.getProfileUrl())
+                .setTitle("🔗 Profil Goodreads: " + profile.getName() , profile.getProfileUrl())
                 .setColor(new Color(0xFFEED2))
                 .setThumbnail(thumbnail);
 
         embed.addField(
-                "În curs de citire (" + profile.getCurrentlyReading().size() + ")",
+                "📖 În curs de citire (" + profile.getCurrentlyReading().size() + ")",
                 formatBookList(profile.getCurrentlyReading(), 3, false),
                 false
         );
 
         embed.addField(
-                "Recent Citite (" + profile.getRead().size() + ")",
-                formatBookList(profile.getRead(), 4, true),
+                "📚 Citite recent (" + profile.getRead().size() + ")",
+                formatBookList(profile.getRead(), 3, true),
                 false
         );
 
         embed.addField(
-                "Vreau să citeasc (" + profile.getToRead().size() + ")",
+                "📋 Vreau să citeasc (" + profile.getToRead().size() + ")",
                 formatBookList(profile.getToRead(), 3, false),
                 false
         );
 
         if (!profile.getDidNotFinish().isEmpty()) {
             embed.addField(
-                    "Abandonate (" + profile.getDidNotFinish().size() + ")",
+                    "🗑️ Abandonate (" + profile.getDidNotFinish().size() + ")",
                     formatBookList(profile.getDidNotFinish(), 3, false),
                     false
             );

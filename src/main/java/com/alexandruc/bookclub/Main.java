@@ -31,7 +31,7 @@ public class Main implements EventListener {
                         .addOption(OptionType.USER, "utilizator", "pentru a vizualiza un utilizator specific"),
                 Commands.slash("link", "Leagă manual un utilizator de un profil Goodreads")
                         .addOption(OptionType.USER, "utilizator", "Utilizatorul de Discord", true)
-                        .addOption(OptionType.STRING, "id", "ID-ul numeric Goodreads", true)
+                        .addOption(OptionType.STRING, "id_goodreads", "ID-ul numeric Goodreads", true)
                         .setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.MODERATE_MEMBERS)),
                 Commands.slash("unlink", "Șterge asocierea de Goodreads a unui utilizator sau după ID Goodreads")
                         .addOption(OptionType.USER, "utilizator", "Utilizatorul căruia îi elimini asocierea", false)
